@@ -1,6 +1,7 @@
 //import some libraries and files
 import "dart:ui";
 import "package:flutter/material.dart";
+import "package:frontend/controllers/auth/send_otp_controller.dart";
 import "package:frontend/widgets/text_field.dart";
 import "../storage/colors.dart";
 import "../widgets/button.dart";
@@ -761,17 +762,18 @@ class _SignInState extends State<SignIn> {
                                     Row(
                                       mainAxisAlignment:MainAxisAlignment.spaceAround,
                                         children:[
-                                          sendOtp ?
+                                         sendOtp ?
                                           CustomTextButton(
                                             text: "Resend OTP",
                                             containerColor: AppColor.transparent,
                                             textColor: Colors.cyan,
                                           )
                                           :CustomTextButton(
+                                            function:(){sendOtpControllerFunction(emailController, context, sendOtp,setState);},
                                             text: "Send OTP",
                                             containerColor: AppColor.transparent,
                                             textColor: Colors.cyan,
-                                          ),
+                                          )
                                       ]
                                     ),
 
