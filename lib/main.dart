@@ -1,6 +1,6 @@
 //import some libraries and files
 import 'package:flutter/material.dart';
-import 'package:frontend/screens/sign_in.dart';
+import 'package:frontend/screens/email_verification.dart';
 
 //main function
 void main(){
@@ -15,7 +15,7 @@ class JTECH3D extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner:false,
-      home:SignIn(),
+      home:EmailVerification(),
     );
   }
 }

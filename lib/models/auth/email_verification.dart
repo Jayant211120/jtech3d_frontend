@@ -4,10 +4,11 @@ class EmailVerificationModel {
   final String? email;
   final int? otp;
   final int? resendOtp;
+  final bool ? status;
   final String? message;
 
   //create constructor
-  EmailVerificationModel({this.email, this.otp, this.resendOtp, this.message});
+  EmailVerificationModel({this.email, this.otp, this.resendOtp,this.status,this.message});
 
   //create factory function
   factory EmailVerificationModel.fromJson(Map<String, dynamic> json) {
@@ -17,6 +18,7 @@ class EmailVerificationModel {
       resendOtp: json['resendOtp'] != null
           ? int.parse(json['resendOtp'].toString())
           : null,
+      status:json['status'],
       message: json['message'].toString(),
     );
   }

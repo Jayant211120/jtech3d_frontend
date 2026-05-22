@@ -30,11 +30,12 @@ class CustomTextField extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextField(
       controller:controller,
-      //style:TextStyle(color:Colors.white),
+      style:TextStyle(color:AppColor.white),
       decoration:InputDecoration(
         hintText:text,
         fillColor:fillColor,
         hintStyle:textStyle,
+        labelStyle:TextStyle(color:AppColor.white),
         prefixIcon:Icon(prefixIcon),
         suffixIcon:Icon(suffixIcon),
         prefixIconColor:prefixIconColor,
@@ -85,6 +86,7 @@ class CustomTextFieldWithObscureText extends StatelessWidget {
     return TextField(
       controller:controller,
       obscureText:true,
+      style:TextStyle(color:AppColor.white),
       decoration:InputDecoration(
         hintText:text,
         fillColor:fillColor,
@@ -122,6 +124,7 @@ class CustomDropDownMenu extends StatefulWidget {
 }
 
 class _CustomDropDownMenuState extends State<CustomDropDownMenu> {
+  //create variables
   late String parameters;
 
   @override
