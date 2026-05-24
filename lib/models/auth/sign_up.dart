@@ -11,9 +11,10 @@ class SignUpModel{
   final String ? message;
   final int ? mobileNumber;
   final bool ? status;
+  final String ? token;
 
   ///create constructor
-  SignUpModel({this.name,this.email,this.address,this.gender,this.password,this.role,this.code,this.message,this.mobileNumber,this.status});
+  SignUpModel({this.name,this.email,this.address,this.gender,this.password,this.role,this.code,this.message,this.mobileNumber,this.status,this.token});
 
   //create function
   factory SignUpModel.fromJson(Map<String,dynamic>json){
@@ -28,6 +29,7 @@ class SignUpModel{
       message:json['message'].toString(),
       mobileNumber:json['mobileNumber'] != null ? int.parse(json['mobileNumber'].toString()) : null,
       status:json['status'],
+      token:json['token'].toString()
     );
   }
 }

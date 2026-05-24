@@ -12,7 +12,7 @@ class ForgotPasswordApi {
       //create response
       final response = await http.post(
         Uri.parse("https://jtech3d.onrender.com/auth/v1/forgotPassword"),
-        headers:{"Content-Type":"application/json",},
+        headers:{"Content-Type":"application/json"},
         body:jsonEncode({"email":email}),
       ).timeout(
         const Duration(seconds:30),
