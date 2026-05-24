@@ -1,7 +1,7 @@
 //import some libraries and files
 import 'package:flutter/material.dart';
 import 'package:frontend/apis/auth/sign_up_api.dart';
-import 'package:frontend/screens/email_verification.dart';
+import 'package:frontend/screens/auth/email_verification.dart';
 import 'package:frontend/storage/colors.dart';
 import 'package:frontend/widgets/text.dart';
 

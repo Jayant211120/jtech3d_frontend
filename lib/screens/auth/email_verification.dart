@@ -2,16 +2,17 @@
 import "dart:ui";
 import "package:flutter/material.dart";
 import "package:frontend/controllers/auth/email_verification_controller.dart";
+import "package:frontend/controllers/auth/forgot_password_controller.dart";
 import "package:frontend/controllers/auth/resend_otp_controller.dart";
 import "package:frontend/controllers/auth/send_otp_controller.dart";
 import "package:frontend/controllers/auth/sign_in_controller.dart";
 import "package:frontend/controllers/auth/sign_up_controller.dart";
 import "package:frontend/widgets/text_field.dart";
-import "../storage/colors.dart";
-import "../widgets/button.dart";
-import "../widgets/container.dart";
-import "../widgets/icon.dart";
-import "../widgets/text.dart";
+import "../../storage/colors.dart";
+import "../../widgets/button.dart";
+import "../../widgets/container.dart";
+import "../../widgets/icon.dart";
+import "../../widgets/text.dart";
 import 'package:flip_card/flip_card.dart';
 
 //create stateful widget
@@ -220,7 +221,8 @@ class _EmailVerificationState extends State<EmailVerification> {
                                           text: "Forgot Password?",
                                           containerColor: AppColor.transparent,
                                           textColor: Colors.cyan,
-                                        )
+                                          function:(){forgotPasswordController(emailController, context);}
+                                          )
                                     ),
 
                                     const SizedBox(height: 10),
@@ -1125,6 +1127,7 @@ class _EmailVerificationState extends State<EmailVerification> {
                                           text: "Forgot Password?",
                                           containerColor: AppColor.transparent,
                                           textColor: Colors.cyan,
+                                            function:(){forgotPasswordController(emailController, context);}
                                         )
                                     ),
 
