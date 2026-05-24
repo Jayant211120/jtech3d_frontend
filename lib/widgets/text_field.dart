@@ -13,6 +13,7 @@ class CustomTextField extends StatelessWidget {
   final Color ? suffixIconColor;
   final Color ? fillColor;
   final TextStyle ? textStyle;
+  final Color ? inputTextColor;
 
   const CustomTextField({
     super.key,
@@ -23,14 +24,15 @@ class CustomTextField extends StatelessWidget {
     this.suffixIcon,
     this.suffixIconColor,
     this.fillColor,
-    this.textStyle
+    this.textStyle,
+    this.inputTextColor,
   });
 
   @override
   Widget build(BuildContext context) {
     return TextField(
       controller:controller,
-      style:TextStyle(color:AppColor.white),
+      style:TextStyle(color:inputTextColor),
       decoration:InputDecoration(
         hintText:text,
         fillColor:fillColor,
@@ -68,6 +70,8 @@ class CustomTextFieldWithObscureText extends StatelessWidget {
   final Color ? suffixIconColor;
   final Color ? fillColor;
   final TextStyle ? textStyle;
+  final Color ? inputTextColor;
+
 
   const CustomTextFieldWithObscureText({
     super.key,
@@ -78,7 +82,8 @@ class CustomTextFieldWithObscureText extends StatelessWidget {
     this.suffixIcon,
     this.suffixIconColor,
     this.fillColor,
-    this.textStyle
+    this.textStyle,
+    this.inputTextColor,
   });
 
   @override
@@ -86,7 +91,7 @@ class CustomTextFieldWithObscureText extends StatelessWidget {
     return TextField(
       controller:controller,
       obscureText:true,
-      style:TextStyle(color:AppColor.white),
+      style:TextStyle(color:inputTextColor),
       decoration:InputDecoration(
         hintText:text,
         fillColor:fillColor,
