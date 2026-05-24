@@ -29,18 +29,21 @@ class _ResetPasswordState extends State<ResetPassword> {
             CustomTextField(
               controller:emailController,
               text: 'Email',
+              fillColor:AppColor.black,
             ),
             
             //otp
             CustomTextField(
               controller:otpController,
               text: 'OTP',
+              fillColor:AppColor.black,
             ),
             
             //password
             CustomTextField(
               controller:passwordController,
               text: 'Password',
+              fillColor:AppColor.black,
             ),
             
             //button
