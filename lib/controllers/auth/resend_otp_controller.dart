@@ -6,9 +6,10 @@ import 'package:frontend/widgets/text.dart';
 import '../../apis/auth/resend_otp.dart';
 
 //create send otp controller function
-void resendOtpControllerFunction(TextEditingController emailController,BuildContext context)async{
+void resendOtpControllerFunction(TextEditingController emailController,BuildContext context,void Function(bool value) cpi)async{
   //use exception handling for handling the errors
   try{
+    cpi(true);
     //create variable
     final email=emailController.text.trim();
 
@@ -18,19 +19,24 @@ void resendOtpControllerFunction(TextEditingController emailController,BuildCont
     //checking conditions
     if(response != null){
       if(response.message == "OTP resend successfully"){
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content:CustomText(text:"OTP Resend Successfully",color:AppColor.white),backgroundColor:AppColor.blue,));
+        cpi(false);//circular progress indicator
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content:CustomText(text:"OTP Resend Successfully",color:AppColor.white),backgroundColor:AppColor.blue));
       }
       else if(response.message == "Email not exist"){
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content:CustomText(text:"Email Not Exist",color:AppColor.white),backgroundColor:AppColor.redAccent,));
+        cpi(false);
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content:CustomText(text:"Email Not Exist",color:AppColor.white),backgroundColor:AppColor.redAccent));
       }
       else if(response.message == "Something went wrong in resend otp"){
+        cpi(false);
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(content:CustomText(text:"Something Went Wrong in Resend OTP",color:AppColor.white),backgroundColor:AppColor.redAccent,));
       }
     }
     else{
+      cpi(false);
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(content:CustomText(text:"Response Not Found",color:AppColor.white),backgroundColor:AppColor.redAccent,));
     }
   }catch(err){
+    cpi(false);
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(content:CustomText(text:err.toString(),color:AppColor.white),backgroundColor:AppColor.redAccent,));
   }
 }

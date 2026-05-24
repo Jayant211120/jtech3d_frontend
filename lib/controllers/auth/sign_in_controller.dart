@@ -9,10 +9,12 @@ import '../../apis/auth/sign_in_api.dart';
 void signInControllerFunction(
     TextEditingController emailController,
     TextEditingController passwordController,
+    void Function(bool value) cpi,
     BuildContext context,
     )async{
   //use exception handling for handling the errors
   try{
+    cpi(true);
     //create variable
     final email=emailController.text.trim();
     final password=passwordController.text.trim();
@@ -24,6 +26,7 @@ print(response?.password);
     //checking conditions
     if(response != null){
       if(response.status == true && response.message == "Signin Successfully"){
+        cpi(false);
         Navigator.pushReplacement(context,MaterialPageRoute(builder:(context)=>HomePage()));
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
@@ -35,6 +38,7 @@ print(response?.password);
         );
       }
       else if(response.status == false && response.message == "User Not Found"){
+        cpi(false);
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: CustomText(
@@ -45,6 +49,7 @@ print(response?.password);
         );
       }
       else if(response.status == false && response.message == "Invalid Credentials"){
+        cpi(false);
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: CustomText(
@@ -55,6 +60,7 @@ print(response?.password);
         );
       }
       else {
+        cpi(false);
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: CustomText(
@@ -67,6 +73,7 @@ print(response?.password);
       }
     }
   }catch(err){
+    cpi(false);
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(content:CustomText(text:err.toString(),color:AppColor.white),backgroundColor:AppColor.redAccent,));
   }
 }

@@ -5,29 +5,34 @@ import 'package:frontend/screens/auth/reset_password.dart';
 import '../../storage/colors.dart';
 import '../../widgets/text.dart';
 
-void forgotPasswordController(TextEditingController emailController,BuildContext context)async{
+void forgotPasswordController(TextEditingController emailController,void Function(bool value) cpi,BuildContext context)async{
   //initialize controllers
   final email = emailController.text.trim();
 
   //use exception handling for handling the errors
   try{
+    cpi(true);
     //create response
     final response = await ForgotPasswordApi().forgotPasswordApiFunction(email);
 
     //checking conditions
     if(response != null){
       if(response.status == true && response.message == "Forgot Password Successfully"){
+        cpi(false);
         Navigator.pushReplacement(context,MaterialPageRoute(builder:(context)=>ResetPassword()));
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(content:CustomText(text:"Forgot Password Successfully",color:AppColor.white),backgroundColor:AppColor.blue));
       }
       if(response.status == false && response.message == "User Not Exist"){
+        cpi(false);
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(content:CustomText(text:"User Not Exist",color:AppColor.white),backgroundColor:AppColor.red));
       }
      else{
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content:CustomText(text:"Something went wrong in forgot password",color:AppColor.white),backgroundColor:AppColor.red));
+       cpi(false);
+       ScaffoldMessenger.of(context).showSnackBar(SnackBar(content:CustomText(text:"Something went wrong in forgot password",color:AppColor.white),backgroundColor:AppColor.red));
       }
     }
   }catch(err){
+    cpi(false);
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(content:CustomText(text:err.toString(),color:AppColor.white),backgroundColor:AppColor.red));
   }
 }

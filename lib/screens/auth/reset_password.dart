@@ -15,9 +15,13 @@ class ResetPassword extends StatefulWidget {
 }
 
 class _ResetPasswordState extends State<ResetPassword> {
+  //create controllers
   TextEditingController emailController = TextEditingController();
   TextEditingController otpController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+
+  //create variables
+  bool cpi=false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -48,11 +52,19 @@ class _ResetPasswordState extends State<ResetPassword> {
             
             //button
             CustomTextButton(
-                text:"Reset Password",
+                text:cpi ? "Loading..." : "Reset Password",
                 containerColor:AppColor.white,
                 textColor:AppColor.blue,
               function:(){
-                  resetPasswordController(emailController,otpController,passwordController, context);
+                  resetPasswordController(
+                      emailController,
+                      otpController,
+                      passwordController,
+                      (value){
+                        cpi=value;
+                      },
+                      context
+                  );
               },
             ),
           ],

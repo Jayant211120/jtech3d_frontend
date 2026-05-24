@@ -39,6 +39,7 @@ class _EmailVerificationState extends State<EmailVerification> {
   //create variable
   bool emailVerification=false;
   late bool sendOtp=false;
+  late bool cpi=false;
   String role='user';
   String gender='male';
 
@@ -190,6 +191,7 @@ class _EmailVerificationState extends State<EmailVerification> {
                                       text: "Enter your email",
                                       fillColor: AppColor.white,
                                       textStyle: TextStyle(color: AppColor.white),
+                                      inputTextColor:AppColor.white,
                                     ),
 
                                     const SizedBox(height: 25),
@@ -210,6 +212,7 @@ class _EmailVerificationState extends State<EmailVerification> {
                                       textStyle: TextStyle(color: AppColor.white),
                                       prefixIcon: Icons.lock_outline,
                                       prefixIconColor: AppColor.cyan,
+                                      inputTextColor:AppColor.white,
                                     ),
 
                                     const SizedBox(height: 15),
@@ -218,10 +221,16 @@ class _EmailVerificationState extends State<EmailVerification> {
                                     Align(
                                         alignment: Alignment.centerRight,
                                         child: CustomTextButton(
-                                          text: "Forgot Password?",
+                                          text:cpi ? "Loading..." : "Forgot Password?",
                                           containerColor: AppColor.transparent,
                                           textColor: Colors.cyan,
-                                          function:(){forgotPasswordController(emailController, context);}
+                                          function:(){forgotPasswordController(
+                                              emailController,
+                                              (value){
+                                                cpi=value;
+                                              },
+                                              context
+                                          );}
                                           )
                                     ),
 
@@ -248,7 +257,16 @@ class _EmailVerificationState extends State<EmailVerification> {
                                         ],
                                       ),
                                       child: ElevatedButton(
-                                        onPressed: () {signInControllerFunction(emailController2, passwordController2, context);},
+                                        onPressed: () {
+                                          signInControllerFunction(
+                                              emailController2,
+                                              passwordController2,
+                                              (value){
+                                                cpi=value;
+                                              },
+                                              context
+                                          );
+                                        },
                                         style: ElevatedButton.styleFrom(
                                           backgroundColor: Colors.transparent,
                                           shadowColor: Colors.transparent,
@@ -257,9 +275,9 @@ class _EmailVerificationState extends State<EmailVerification> {
                                                 18),
                                           ),
                                         ),
-                                        child: const Text(
-                                          "Sign In",
-                                          style: TextStyle(
+                                        child: Text(
+                                          cpi ? "Loading..." : "Sign In",
+                                          style: const TextStyle(
                                             color: Colors.white,
                                             fontSize: 18,
                                             fontWeight: FontWeight.bold,
@@ -412,6 +430,7 @@ class _EmailVerificationState extends State<EmailVerification> {
                                       text: "Enter your name",
                                       fillColor: AppColor.white,
                                       textStyle: TextStyle(color: AppColor.white),
+                                      inputTextColor:AppColor.white,
                                     ),
                                     const SizedBox(height: 25),
 
@@ -431,6 +450,7 @@ class _EmailVerificationState extends State<EmailVerification> {
                                       text: "Enter your email",
                                       fillColor: AppColor.white,
                                       textStyle: TextStyle(color: AppColor.white),
+                                      inputTextColor:AppColor.white,
                                     ),
 
                                     const SizedBox(height: 25),
@@ -451,6 +471,7 @@ class _EmailVerificationState extends State<EmailVerification> {
                                       textStyle: TextStyle(color: AppColor.white),
                                       prefixIcon: Icons.call,
                                       prefixIconColor: AppColor.cyan,
+                                      inputTextColor:AppColor.white,
                                     ),
 
                                     const SizedBox(height: 25),
@@ -470,6 +491,7 @@ class _EmailVerificationState extends State<EmailVerification> {
                                       textStyle: TextStyle(color: AppColor.white),
                                       prefixIcon: Icons.local_activity,
                                       prefixIconColor: AppColor.cyan,
+                                      inputTextColor:AppColor.white,
                                     ),
 
                                     const SizedBox(height: 25),
@@ -523,6 +545,7 @@ class _EmailVerificationState extends State<EmailVerification> {
                                       textStyle: TextStyle(color: AppColor.white),
                                       prefixIcon: Icons.lock_outline,
                                       prefixIconColor: AppColor.cyan,
+                                      inputTextColor:AppColor.white,
                                     ),
 
                                     const SizedBox(height: 25),
@@ -577,6 +600,7 @@ class _EmailVerificationState extends State<EmailVerification> {
                                       textStyle: TextStyle(color: AppColor.white),
                                       prefixIcon: Icons.lock_outline,
                                       prefixIconColor: AppColor.cyan,
+                                      inputTextColor:AppColor.white,
                                     ),
 
                                     const SizedBox(height: 25),
@@ -611,6 +635,9 @@ class _EmailVerificationState extends State<EmailVerification> {
                                               role,
                                               codeController,
                                               mobileNumberController,
+                                              (value){
+                                                cpi=value;
+                                              },
                                               context
                                           );
                                         },
@@ -622,9 +649,9 @@ class _EmailVerificationState extends State<EmailVerification> {
                                                 18),
                                           ),
                                         ),
-                                        child: const Text(
-                                          "Sign Up",
-                                          style: TextStyle(
+                                        child: Text(
+                                          cpi ? "Loading..." : "Sign Up",
+                                          style: const TextStyle(
                                             color: Colors.white,
                                             fontSize: 18,
                                             fontWeight: FontWeight.bold,
@@ -794,6 +821,7 @@ class _EmailVerificationState extends State<EmailVerification> {
                                       text: "Enter your email",
                                       fillColor: AppColor.white,
                                       textStyle:TextStyle(color: AppColor.white),
+                                      inputTextColor:AppColor.white,
                                     ),
 
                                     const SizedBox(height: 25),
@@ -816,6 +844,7 @@ class _EmailVerificationState extends State<EmailVerification> {
                                       text: "Enter OTP",
                                       fillColor: AppColor.white,
                                       textStyle: TextStyle(color: AppColor.white),
+                                      inputTextColor:AppColor.white,
                                     ),
 
                                     const SizedBox(height: 25),
@@ -825,20 +854,30 @@ class _EmailVerificationState extends State<EmailVerification> {
                                         children:[
                                          sendOtp ?
                                           CustomTextButton(
-                                            function:(){resendOtpControllerFunction(emailController, context);},
-                                            text: "Resend OTP",
+                                            function:(){resendOtpControllerFunction(
+                                                emailController, context,
+                                                (value){
+                                                  setState(() {
+                                                    cpi=value;
+                                                  });
+                                                }
+                                            );},
+                                            text: cpi ? "Loading..." : "Resend OTP",
                                             containerColor: AppColor.transparent,
                                             textColor: Colors.cyan,
                                           )
                                           :CustomTextButton(
                                             function:(){
-                                              sendOtpControllerFunction(
-                                                  emailController,
-                                                  context,
+                                              sendOtpControllerFunction(emailController,context,
                                                   (value){
                                                     setState(() {
                                                       sendOtp=true;
                                                     });
+                                                  },
+                                                  (value){
+                                                   setState(() {
+                                                     cpi=value;
+                                                   });
                                                   }
                                                );
                                               },
@@ -873,11 +912,22 @@ class _EmailVerificationState extends State<EmailVerification> {
                                         ],
                                       ),
                                       child: ElevatedButton(
-                                        onPressed: () {emailVerificationControllerFunction(emailController, otpController,(value){
-                                          setState(() {
-                                            emailVerification=value!;
-                                          });
-                                        },context);},
+                                        onPressed: () {
+                                          emailVerificationControllerFunction(
+                                              emailController,
+                                              otpController,
+                                                  (value){
+                                                    setState((){
+                                                    emailVerification=value!;
+                                                  });
+                                                },
+                                              (value){
+                                                setState(() {
+                                                  cpi=value;
+                                                });
+                                              },
+                                              context
+                                          );},
                                         style: ElevatedButton.styleFrom(
                                           backgroundColor: Colors.transparent,
                                           shadowColor: Colors.transparent,
@@ -1097,6 +1147,7 @@ class _EmailVerificationState extends State<EmailVerification> {
                                       text: "Enter your email",
                                       fillColor: AppColor.white,
                                       textStyle: TextStyle(color: AppColor.white),
+                                      inputTextColor:AppColor.white,
                                     ),
 
                                     const SizedBox(height: 25),
@@ -1117,6 +1168,7 @@ class _EmailVerificationState extends State<EmailVerification> {
                                       textStyle: TextStyle(color: AppColor.white),
                                       prefixIcon: Icons.lock_outline,
                                       prefixIconColor: AppColor.cyan,
+                                      inputTextColor:AppColor.white,
                                     ),
 
                                     const SizedBox(height: 15),
@@ -1127,7 +1179,13 @@ class _EmailVerificationState extends State<EmailVerification> {
                                           text: "Forgot Password?",
                                           containerColor: AppColor.transparent,
                                           textColor: Colors.cyan,
-                                            function:(){forgotPasswordController(emailController, context);}
+                                            function:(){forgotPasswordController(
+                                                emailController,
+                                                (value){
+                                                  cpi=value;
+                                                },
+                                                 context
+                                            );}
                                         )
                                     ),
 
@@ -1153,7 +1211,15 @@ class _EmailVerificationState extends State<EmailVerification> {
                                         ],
                                       ),
                                       child: ElevatedButton(
-                                        onPressed: () {signInControllerFunction(emailController2,passwordController2,context);},
+                                        onPressed: () {signInControllerFunction(
+                                            emailController2,
+                                            passwordController2,
+                                            (value){
+                                              cpi=value;
+                                            },
+                                            context
+                                        );
+                                        },
                                         style: ElevatedButton.styleFrom(
                                           backgroundColor: Colors.transparent,
                                           shadowColor: Colors.transparent,
@@ -1162,9 +1228,9 @@ class _EmailVerificationState extends State<EmailVerification> {
                                                 18),
                                           ),
                                         ),
-                                        child: const Text(
-                                          "Sign In",
-                                          style: TextStyle(
+                                        child: Text(
+                                          cpi ? "Loading..." : "Sign In",
+                                          style: const TextStyle(
                                             color: Colors.white,
                                             fontSize: 18,
                                             fontWeight: FontWeight.bold,
@@ -1317,6 +1383,7 @@ class _EmailVerificationState extends State<EmailVerification> {
                                       text: "Enter your name",
                                       fillColor: AppColor.white,
                                       textStyle: TextStyle(color: AppColor.white),
+                                      inputTextColor:AppColor.white,
                                     ),
                                     const SizedBox(height: 25),
 
@@ -1336,6 +1403,7 @@ class _EmailVerificationState extends State<EmailVerification> {
                                       text: "Enter your email",
                                       fillColor: AppColor.white,
                                       textStyle: TextStyle(color: AppColor.white),
+                                      inputTextColor:AppColor.white,
                                     ),
 
                                     const SizedBox(height: 25),
@@ -1356,6 +1424,7 @@ class _EmailVerificationState extends State<EmailVerification> {
                                       textStyle: TextStyle(color: AppColor.white),
                                       prefixIcon: Icons.call,
                                       prefixIconColor: AppColor.cyan,
+                                      inputTextColor:AppColor.white,
                                     ),
 
                                     const SizedBox(height: 25),
@@ -1375,6 +1444,7 @@ class _EmailVerificationState extends State<EmailVerification> {
                                       textStyle: TextStyle(color: AppColor.white),
                                       prefixIcon: Icons.local_activity,
                                       prefixIconColor: AppColor.cyan,
+                                      inputTextColor:AppColor.white,
                                     ),
 
                                     const SizedBox(height: 25),
@@ -1428,6 +1498,7 @@ class _EmailVerificationState extends State<EmailVerification> {
                                       textStyle: TextStyle(color: AppColor.white),
                                       prefixIcon: Icons.lock_outline,
                                       prefixIconColor: AppColor.cyan,
+                                      inputTextColor:AppColor.white,
                                     ),
 
                                     const SizedBox(height: 25),
@@ -1482,6 +1553,7 @@ class _EmailVerificationState extends State<EmailVerification> {
                                         textStyle: TextStyle(color: AppColor.white),
                                         prefixIcon: Icons.lock_outline,
                                         prefixIconColor: AppColor.cyan,
+                                        inputTextColor:AppColor.white,
                                       ),
 
                                     const SizedBox(height: 25),
@@ -1516,6 +1588,9 @@ class _EmailVerificationState extends State<EmailVerification> {
                                               role,
                                               codeController,
                                               mobileNumberController,
+                                              (value){
+                                                cpi=value;
+                                              },
                                               context
                                           );
                                         },
@@ -1527,8 +1602,8 @@ class _EmailVerificationState extends State<EmailVerification> {
                                                 18),
                                           ),
                                         ),
-                                        child: const Text(
-                                          "Sign Up",
+                                        child:Text(
+                                          cpi ? "Loading..." : "Sign Up",
                                           style: TextStyle(
                                             color: Colors.white,
                                             fontSize: 18,
@@ -1699,6 +1774,7 @@ class _EmailVerificationState extends State<EmailVerification> {
                                       text: "Enter your email",
                                       fillColor: AppColor.white,
                                       textStyle:TextStyle(color: AppColor.white),
+                                      inputTextColor:AppColor.white,
                                     ),
 
                                     const SizedBox(height: 25),
@@ -1721,6 +1797,7 @@ class _EmailVerificationState extends State<EmailVerification> {
                                         text: "Enter OTP",
                                         fillColor: AppColor.white,
                                         textStyle: TextStyle(color: AppColor.white),
+                                        inputTextColor:AppColor.white,
                                       ),
 
                                     const SizedBox(height: 25),
@@ -1730,8 +1807,18 @@ class _EmailVerificationState extends State<EmailVerification> {
                                         children:[
                                           sendOtp ?
                                           CustomTextButton(
-                                            function:(){resendOtpControllerFunction(emailController, context);},
-                                            text: "Resend OTP",
+                                            function:(){
+                                              resendOtpControllerFunction(
+                                                  emailController,
+                                                  context,
+                                                  (value){
+                                                   setState(() {
+                                                     cpi=value;
+                                                   });
+                                                  }
+                                              );
+                                            },
+                                            text:cpi ? "Loading..." : "Resend OTP",
                                             containerColor: AppColor.transparent,
                                             textColor: Colors.cyan,
                                           )
@@ -1741,13 +1828,18 @@ class _EmailVerificationState extends State<EmailVerification> {
                                                   emailController,
                                                   context,
                                                       (value){
-                                                    setState(() {
-                                                      sendOtp=true;
-                                                    });
-                                                  }
-                                              );
-                                            },
-                                            text: "Send OTP",
+                                                        setState(() {
+                                                        sendOtp=true;
+                                                        });
+                                                       },
+                                                        (value){
+                                                      setState(() {
+                                                        cpi=value;
+                                                      });
+                                                    }
+                                                  );
+                                              },
+                                            text:cpi ? "Loading..." : "Send OTP",
                                             containerColor: AppColor.transparent,
                                             textColor: Colors.cyan,
                                           )
@@ -1778,11 +1870,22 @@ class _EmailVerificationState extends State<EmailVerification> {
                                           ],
                                         ),
                                         child: ElevatedButton(
-                                          onPressed: () {emailVerificationControllerFunction(emailController, otpController,(value){
+                                          onPressed: () {
+                                            emailVerificationControllerFunction(
+                                                emailController,
+                                                otpController,
+                                                    (value){
                                             setState(() {
                                               emailVerification=value!;
                                             });
-                                          },context);},
+                                          },
+                                                (value){
+                                                  setState(() {
+                                                    cpi=value;
+                                                  });
+                                                },
+                                                context
+                                            );},
                                           style: ElevatedButton.styleFrom(
                                             backgroundColor: Colors.transparent,
                                             shadowColor: Colors.transparent,

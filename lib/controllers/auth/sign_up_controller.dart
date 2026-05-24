@@ -14,10 +14,12 @@ void signUpControllerFunction(
     String role,
     TextEditingController codeController,
     TextEditingController mobileNumberController,
+    void Function(bool value) cpi,
     BuildContext context,
     )async{
   //use exception handling for handling the errors
   try{
+    cpi(true);
     //create variable
     final name=nameController.text.trim();
     final mobileNumber=int.parse(mobileNumberController.text.trim());
@@ -31,6 +33,7 @@ void signUpControllerFunction(
     //checking conditions
     if(response != null){
       if(response.status == true && response.message == "Signup Successfully"){
+        cpi(false);
         Navigator.pushReplacement(context,MaterialPageRoute(builder:(context)=>EmailVerification()));
         ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
@@ -42,6 +45,7 @@ void signUpControllerFunction(
         );
       }
       else if(response.status == false && response.message == "Email Not Verified"){
+        cpi(false);
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: CustomText(
@@ -52,6 +56,7 @@ void signUpControllerFunction(
         );
       }
       else if(response.status == false && response.message == "Password Not Hashed"){
+        cpi(false);
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: CustomText(
@@ -62,6 +67,7 @@ void signUpControllerFunction(
         );
       }
       else {
+        cpi(false);
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: CustomText(
@@ -75,6 +81,7 @@ void signUpControllerFunction(
     }
   }catch(err){
     print(err);
+    cpi(false);
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(content:CustomText(text:err.toString(),color:AppColor.white),backgroundColor:AppColor.redAccent,));
   }
 }
