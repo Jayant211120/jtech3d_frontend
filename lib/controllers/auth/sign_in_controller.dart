@@ -1,5 +1,6 @@
 //import some libraries and files
 import 'package:flutter/material.dart';
+import 'package:frontend/controllers/auth/shared_preferences.dart';
 import 'package:frontend/screens/user/home_page.dart';
 import 'package:frontend/storage/colors.dart';
 import 'package:frontend/widgets/text.dart';
@@ -26,6 +27,10 @@ print(response?.password);
     //checking conditions
     if(response != null){
       if(response.status == true && response.message == "Signin Successfully"){
+        if(response.token != null){
+        await SharedPreference().setToken(response.token!);
+        await SharedPreference().setRole(response.role!);
+        }
         cpi(false);
         Navigator.pushReplacement(context,MaterialPageRoute(builder:(context)=>HomePage()));
         ScaffoldMessenger.of(context).showSnackBar(
