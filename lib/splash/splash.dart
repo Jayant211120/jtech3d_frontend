@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:frontend/screens/auth/email_verification.dart';
 import 'package:frontend/screens/user/home_page.dart';
+import 'package:lottie/lottie.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../screens/admin/dashboard.dart';
 import '../storage/colors.dart';
@@ -23,28 +24,28 @@ class _SplashState extends State<Splash> {
     final pref = await SharedPreferences.getInstance();
     final token = pref.getString('token');
     final role = pref.getString('role');
+    print(role);
+    print(token);
 
     //use timer
-    await Future.delayed(Duration(seconds:5),(){
+    await Future.delayed(Duration(seconds:5));
       //checking conditions
       if(token != null){
         if(role == "admin"){
           Navigator.pushReplacement(context,MaterialPageRoute(builder:(context)=>Dashboard()));
         }
         else{
-          Navigator.pushReplacement(context,MaterialPageRoute(builder:(context)=>HomePage()));
+          Navigator.pushNamed(context,"/homePage");
         }
       }
       else{
         Navigator.pushReplacement(context,MaterialPageRoute(builder:(context)=>EmailVerification()));
-      };
-    });
+      }
   }
-
 
   //init state
   @override
-  void initState()async{
+  void initState(){
     startApp();
     super.initState();
   }
@@ -53,8 +54,11 @@ class _SplashState extends State<Splash> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor:AppColor.black,
-      body:Center(
-        child:Image.asset("assets/json/3D printer.json"),
+      body:Container(
+        color:AppColor.black,
+        width: double.infinity,
+        height:double.infinity,
+        child:Lottie.asset("assets/Files/3D printer.json"),
       ),
     );
   }

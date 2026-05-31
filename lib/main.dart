@@ -1,6 +1,7 @@
 //import some libraries and files
 import 'package:flutter/material.dart';
-import 'package:frontend/screens/auth/email_verification.dart';
+import 'package:frontend/routes/routes.dart';
+import 'package:frontend/splash/splash.dart';
 
 //main function
 void main(){
@@ -15,7 +16,15 @@ class JTECH3D extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner:false,
-      home:EmailVerification(),
+      initialRoute:"/",
+      routes:{
+        "/":(context)=>Splash(),
+
+        ///user route
+        ...UserRoutes.routes,
+
+        ///admin route
+      },
     );
   }
 }

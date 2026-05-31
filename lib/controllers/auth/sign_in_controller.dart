@@ -22,12 +22,13 @@ void signInControllerFunction(
 
     //call send otp api function
     final response=await SignInApi().signInApiFunction(email,password);
-print(response?.email);
-print(response?.password);
+
     //checking conditions
     if(response != null){
       if(response.status == true && response.message == "Signin Successfully"){
         if(response.token != null){
+          print(response.token);
+          print(response.role);
         await SharedPreference().setToken(response.token!);
         await SharedPreference().setRole(response.role!);
         }

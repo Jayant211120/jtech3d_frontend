@@ -83,8 +83,11 @@ class CustomTextButtonWithIcon extends StatelessWidget {
   final double ? containerHeight;
   final double ? containerWidth;
   final VoidCallback ? function;
+  final Color ? iconColor;
+  final TextDirection ? textDirection;
+  final Color ? textColor;
 
-  const CustomTextButtonWithIcon({super.key,required this.text,required this.containerColor,required this.icon,this.containerHeight,this.containerWidth,this.function});
+  const CustomTextButtonWithIcon({super.key,required this.text,required this.containerColor,required this.icon,this.containerHeight,this.containerWidth,this.function,this.iconColor,this.textDirection,this.textColor});
 
   @override
   Widget build(BuildContext context) {
@@ -94,8 +97,8 @@ class CustomTextButtonWithIcon extends StatelessWidget {
       color:containerColor,
       shape:BoxShape.rectangle,
       child: TextButton.icon(
-        icon:Icon(icon),
-        label:CustomText(text:text),
+        label:CustomText(text:text,color:textColor,),
+        icon:Icon(icon,color:iconColor,textDirection:textDirection),
         onPressed:function,
         style:TextButton.styleFrom(
             shape:RoundedRectangleBorder(
@@ -149,8 +152,9 @@ class CustomElevatedButtonWithIcon extends StatelessWidget {
   final double ? containerHeight;
   final double ? containerWidth;
   final VoidCallback ? function;
+  final Color ? iconColor;
 
-  const CustomElevatedButtonWithIcon({super.key,required this.text,required this.containerColor,required this.icon,this.containerWidth,this.containerHeight,this.function});
+  const CustomElevatedButtonWithIcon({super.key,required this.text,required this.containerColor,required this.icon,this.containerWidth,this.containerHeight,this.function,this.iconColor});
 
   @override
   Widget build(BuildContext context) {
@@ -160,7 +164,7 @@ class CustomElevatedButtonWithIcon extends StatelessWidget {
       color:containerColor,
       shape:BoxShape.rectangle,
       child: TextButton.icon(
-        icon:Icon(icon),
+        icon:Icon(icon,color:iconColor),
         label:CustomText(text:text),
         onPressed:function,
         style:TextButton.styleFrom(

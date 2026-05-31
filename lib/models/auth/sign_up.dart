@@ -18,18 +18,19 @@ class SignUpModel{
 
   //create function
   factory SignUpModel.fromJson(Map<String,dynamic>json){
+    final data =json['data'];
     return SignUpModel(
       name:json['name'].toString(),
       email:json['email'].toString(),
       address:json['address'].toString(),
       gender:json['gender'].toString(),
       password:json['password'].toString(),
-      role:json['role'].toString(),
+      role:data['role'].toString(),
       code:json['code'].toString(),
       message:json['message'].toString(),
       mobileNumber:json['mobileNumber'] != null ? int.parse(json['mobileNumber'].toString()) : null,
       status:json['status'],
-      token:json['token'].toString()
+      token:data['token'].toString()
     );
   }
 }
