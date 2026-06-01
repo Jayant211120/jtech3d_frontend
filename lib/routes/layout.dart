@@ -1,8 +1,8 @@
+//import some libraries and files
 import 'package:flutter/material.dart';
+import 'package:frontend/features/home_page/navigation.dart';
 import 'package:frontend/routes/routes.dart';
 import 'package:frontend/widgets/button.dart';
-import 'package:frontend/widgets/icon.dart';
-import 'package:frontend/widgets/list_tile.dart';
 import '../../storage/colors.dart';
 import '../../widgets/text.dart';
 class Layout extends StatefulWidget {
@@ -21,15 +21,13 @@ class _LayoutState extends State<Layout> {
   @override
   Widget build(BuildContext context) {
     //create variables
-    final responsive = MediaQuery.of(context).size.width < 768;
+    final responsive = MediaQuery.of(context).size.width < 1020;
 
 
     //create Lists
-    final List<String> drawerItems = ["Home","3D Models","Custom Products","Image to 3D Model","stl/obj to 3D Model","Raised Tickets","Training"];
-    final List<IconData> drawerIcons = [Icons.home,Icons.model_training,Icons.food_bank,Icons.image,Icons.file_copy,Icons.airplane_ticket,Icons.train];
+    final List<String> drawerItems = ["Home","3D Models","Custom Products","Image to 3D","stl to 3D","Tickets","Training"];
     final List<IconData> bottomNavigationBarIcons = [Icons.home,Icons.food_bank,Icons.airplane_ticket,Icons.settings];
     final List<String> bottomNavigationBarLabel = ["Home","3D-Models","Raised Ticket","Settings"];
-    final List<String> callBackFunctions = ["/homePage","/availableProducts","/customProducts","/imageTo3d","/stlTo3d","/raisedTickets","/training"];
     final List<String> bottomRoutes = [UserRoutes.homePage,UserRoutes.availableProducts,UserRoutes.raisedTickets,UserRoutes.settings,
     ];
 
@@ -40,8 +38,21 @@ class _LayoutState extends State<Layout> {
         //appbar
         appBar:AppBar(
           backgroundColor:AppColor.black,
-          title:CustomText(text:"JTECH3D",fontSize:20,color:AppColor.white),
+          automaticallyImplyLeading:false,
           iconTheme:IconThemeData(color:AppColor.white),
+          title:responsive ?
+            CustomText(text:"JTECH3D",color:AppColor.white,)
+              :
+            Row(
+            children: [
+              //title
+              CustomText(text:"JTECH3D",color:AppColor.white),
+
+              //navigation bar
+              Navigation()
+            ],
+          ),
+
           actions: [
             //notification
             CustomTextButtonWithIcon(
@@ -56,44 +67,22 @@ class _LayoutState extends State<Layout> {
               containerColor:AppColor.transparent,
               icon:Icons.add_shopping_cart,
               iconColor:AppColor.white,
+            ),
+            Padding(
+              padding: const EdgeInsets.all(10),
+              child: CustomTextButtonWithIcon(
+                text:"Logout",
+                textColor:AppColor.white,
+                icon:Icons.power_settings_new,
+                iconColor:AppColor.white,
+                containerColor:AppColor.blue,
+              ),
             )
           ],
         ),
 
         //body
         body:widget.body,
-
-        //drawer
-        drawer:responsive ? null
-            :Drawer(
-          backgroundColor:AppColor.black,
-          child:Column(
-            children: [
-              //header
-              DrawerHeader(
-                child:Column(
-                  children: [
-                    CustomIcon(icon:Icons.face)
-                  ],
-                ),
-              ),
-              //items
-              ListView.builder(
-                itemCount:drawerItems.length,
-                shrinkWrap:true,
-                physics:NeverScrollableScrollPhysics(),
-                itemBuilder:(context,value){
-                  return CustomListTile(
-                      title:drawerItems[value],
-                      textColor:AppColor.white,
-                      leading:CustomIcon(icon:drawerIcons[value],color:AppColor.white,),
-                      function:(){print(callBackFunctions[value]);Navigator.pushNamed(context,callBackFunctions[value]);}
-                  );
-                },
-              )
-            ],
-          ),
-        ),
 
         //bottom navigation bar
         bottomNavigationBar:responsive ?
