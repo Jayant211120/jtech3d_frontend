@@ -2,12 +2,12 @@
 import 'package:flutter/material.dart';
 
 //create class
-class SubPartOfHeroSectionInHomePage{
+class ListTileTypeModel{
   //variables
   final String title;
   final String subtitle;
   final IconData icons;
 
   //create constructor
-  SubPartOfHeroSectionInHomePage({required this.title,required this.subtitle,required this.icons});
+  ListTileTypeModel({required this.title,required this.subtitle,required this.icons});
 }

@@ -1,8 +1,14 @@
 //import some libraries and files
 import 'package:flutter/material.dart';
 import 'package:frontend/features/home_page/hero_section_web_view.dart';
+import 'package:frontend/features/home_page/how_it_work_web_view.dart';
+import 'package:frontend/features/home_page/services_web_view.dart';
+import 'package:frontend/features/home_page/why_choose.dart';
 
 import '../../features/home_page/hero_section_mobile_view.dart';
+import '../../features/home_page/how_it_works_mobile_view.dart';
+import '../../features/home_page/needs_some_custom.dart';
+import '../../features/home_page/popular_categories.dart';
 
 //stateful widget
 class HomePage extends StatefulWidget {
@@ -19,46 +25,35 @@ class _HomePageState extends State<HomePage> {
     final isMobile = MediaQuery.of(context).size.width < 1020;
 
     return SingleChildScrollView(
-      child:
-      //mobile screen
-      isMobile ?
-          Column(
+      child:Column(
             children: [
+
+              //hero section
+              isMobile ?
               HeroSectionMobileView()
+
+              :HeroSectionWebView(),
+
+              //how it work
+              isMobile ?
+              HowItWorkMobileView()
+
+              :HowItWorkWebView(),
+
+              //our services
+              Services(),
+
+              //need some custom
+              NeedSomeCustom(),
+
+              //popular categories
+              PopularCategories(),
+
+              //why choose
+              WhyChoose(),
+
             ],
           )
-
-      :
-      //web screen
-      Column(
-        children: [
-          HeroSectionWebView()
-
-          //how it works
-
-
-          //our services
-
-
-          //need a something custom
-
-
-          //popular categories
-
-
-          //why choose jtech3d
-
-
-          //our recent work
-
-
-          //what our client says
-
-
-          //footer
-
-        ],
-      ),
     );
   }
 }

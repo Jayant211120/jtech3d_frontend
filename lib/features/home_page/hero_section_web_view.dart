@@ -1,7 +1,6 @@
 //import some files and libraries
 import 'package:flutter/material.dart';
-
-import '../../models/users/homePage/hero_section.dart';
+import 'package:frontend/models/users/homePage/list_tile_type_model.dart';
 import '../../storage/colors.dart';
 import '../../widgets/container.dart';
 import '../../widgets/icon.dart';
@@ -16,23 +15,23 @@ class HeroSectionWebView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     //create list
-    final List<SubPartOfHeroSectionInHomePage> features = [
-      SubPartOfHeroSectionInHomePage(
+    final List<ListTileTypeModel> features = [
+      ListTileTypeModel(
         title: "High Quality Prints",
         subtitle: "Precision you can trust",
         icons: Icons.high_quality,
       ),
-      SubPartOfHeroSectionInHomePage(
+      ListTileTypeModel(
         title: "Fast Turnaround",
         subtitle: "On-time every time",
         icons: Icons.access_time,
       ),
-      SubPartOfHeroSectionInHomePage(
+      ListTileTypeModel(
         title: "Secure & Reliable",
         subtitle: "Your data is safe",
         icons: Icons.security,
       ),
-      SubPartOfHeroSectionInHomePage(
+      ListTileTypeModel(
         title: "Custom Solutions",
         subtitle: "Tailored to your needs",
         icons: Icons.build,

@@ -12,32 +12,32 @@ class Navigation extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     //create list
-    final List<HomePageNavigationBar> features = [
-      HomePageNavigationBar(
+    final List<HomePageNavigationBarModel> features = [
+      HomePageNavigationBarModel(
         name:"Home",
         function:"/homePage"
       ),
-      HomePageNavigationBar(
+      HomePageNavigationBarModel(
           name:"3D Models",
           function:"/availableProducts"
       ),
-      HomePageNavigationBar(
+      HomePageNavigationBarModel(
           name:"CustomProducts",
           function:"/customProducts"
       ),
-      HomePageNavigationBar(
+      HomePageNavigationBarModel(
           name:"Image To 3D",
           function:"/imageTo3d"
       ),
-      HomePageNavigationBar(
+      HomePageNavigationBarModel(
           name:"STL to 3D",
           function:"/stlTo3d"
       ),
-      HomePageNavigationBar(
+      HomePageNavigationBarModel(
           name:"Tickets",
           function:"/raisedTickets"
       ),
-      HomePageNavigationBar(
+      HomePageNavigationBarModel(
           name:"Training",
           function:"/training"
       ),

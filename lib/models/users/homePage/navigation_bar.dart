@@ -1,9 +1,9 @@
 //create class
-class HomePageNavigationBar{
+class HomePageNavigationBarModel{
   //create variables
   final String name;
   final String function;
 
   //create constructor
-  HomePageNavigationBar({required this.name,required this.function});
+  HomePageNavigationBarModel({required this.name,required this.function});
 }
