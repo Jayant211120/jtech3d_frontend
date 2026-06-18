@@ -4,13 +4,28 @@ import 'package:frontend/models/users/homePage/container_type_model_without_subh
 import 'package:frontend/widgets/container.dart';
 import 'package:frontend/widgets/image.dart';
 
+import '../../screens/scroll_behaviour.dart';
 import '../../storage/colors.dart';
 import '../../widgets/text.dart';
 
 //stateless widget
-class PopularCategories extends StatelessWidget {
+class PopularCategories extends StatefulWidget {
   const PopularCategories({super.key});
 
+  @override
+  State<PopularCategories> createState() => _PopularCategoriesState();
+}
+
+class _PopularCategoriesState extends State<PopularCategories> {
+  //create controllers
+  final ScrollController _scrollController = ScrollController();
+
+  //dispose state
+  @override
+  void dispose() {
+   _scrollController.dispose();
+    super.dispose();
+  }
   @override
   Widget build(BuildContext context) {
     //create variable list
@@ -56,43 +71,44 @@ class PopularCategories extends StatelessWidget {
     return Column(
       children: [
         //heading
+        SizedBox(
+            height:300,
+            child:Scrollbar(
+              thumbVisibility:true,
+              controller:_scrollController,
+              child: ListView.builder(
+                itemCount:features.length,
+                scrollDirection:Axis.horizontal,
+                itemBuilder:(context,value){
+                  //create variable
+                  final feature = features[value];
+                  return Padding(
+                    padding: const EdgeInsets.all(10),
+                    child:Container(
+                      //shape:BoxShape.rectangle,
+                      color:AppColor.blueWithOpacityWithZeroPointZeroFour,
+                      child:Column(
+                        children: [
+                          //image
+                          CustomNetworkImage(url:feature.image,height:200,width:200,fit:BoxFit.cover),
+
+                          //heading
+                          CustomText(text:feature.heading,fontSize:20,fontWeight:FontWeight.bold)
+                        ],
+                      ),
+                    ),
+                  );
+                },
+              ),
+            ),
+          ),
+
+        //content
         Padding(
           padding: const EdgeInsets.all(20),
           child: CustomText(text:"POPULAR CATEGORIES",fontSize:20,fontWeight:FontWeight.bold),
-        ),
+        )
 
-        //content
-        Wrap(
-          spacing:15,
-          runSpacing:20,
-          direction:Axis.horizontal,
-          children:features.map((feature){
-            return CustomContainer(
-              shape:BoxShape.rectangle,
-              color:AppColor.blueWithOpacityWithZeroPointZeroFour,
-              child:Column(
-                children: [
-                  //image
-                  Padding(
-                    padding: const EdgeInsets.all(10),
-                    child: CustomNetworkImage(
-                      url:feature.image,
-                      fit:BoxFit.cover,
-                      height:200,
-                      width:200,
-                    ),
-                  ),
-
-                  //heading
-                  Padding(
-                    padding: const EdgeInsets.all(10),
-                    child: CustomText(text:"Check",fontSize:20,fontWeight:FontWeight.bold),
-                  )
-                ],
-              ),
-            );
-          }).toList(),
-        ),
       ],
     );
   }

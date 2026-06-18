@@ -1,6 +1,7 @@
 //import some libraries and files
 import 'package:flutter/material.dart';
 import 'package:frontend/routes/routes.dart';
+import 'package:frontend/screens/scroll_behaviour.dart';
 import 'package:frontend/splash/splash.dart';
 
 //main function
@@ -16,6 +17,7 @@ class JTECH3D extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner:false,
+      scrollBehavior:MyScrollBehavior(),
       initialRoute:"/",
       routes:{
         "/":(context)=>Splash(),

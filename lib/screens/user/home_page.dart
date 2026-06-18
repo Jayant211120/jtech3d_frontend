@@ -5,6 +5,7 @@ import 'package:frontend/features/home_page/how_it_work_web_view.dart';
 import 'package:frontend/features/home_page/services_web_view.dart';
 import 'package:frontend/features/home_page/why_choose.dart';
 
+import '../../features/home_page/contact.dart';
 import '../../features/home_page/hero_section_mobile_view.dart';
 import '../../features/home_page/how_it_works_mobile_view.dart';
 import '../../features/home_page/needs_some_custom.dart';
@@ -51,6 +52,10 @@ class _HomePageState extends State<HomePage> {
 
               //why choose
               WhyChoose(),
+
+              //footer
+              ContactUs()
+
 
             ],
           )
